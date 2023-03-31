@@ -1,0 +1,106 @@
+################################################################################
+# SERVICES
+################################################################################
+services:
+
+  datanode:
+    build: ./datanode
+    image: datanode
+    restart: always
+    command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' https://datanode_pod:3001)" != "200" ]]; do echo ..; sleep 5; done; echo backend is up;node index.js'
+    depends_on:
+      - datanode_pod
+    environment:
+      - HOST=https://datanode_pod:3001/
+      - NAME=${DN_NAME}
+      - EMAIL=${DN_EMAIL}
+      - PASSWORD=${DN_PASSWORD}
+      - IDP=https://datanode_pod:3001
+      - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
+    volumes:
+      - ${CA_CERT_DIR}:/shared-certs
+    networks:
+      - app_net
+
+  servicenode:
+    build: ./servicenode
+    image: servicenode
+    restart: always
+    command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' https://servicenode_pod:3001)" != "200" ]]; do echo ..; sleep 5; done; echo backend is up;node index.js'
+    depends_on:
+      - servicenode_pod
+    environment:
+      - HOST=https://servicenode_pod:3001/
+      - NAME=${SN_NAME}
+      - EMAIL=${SN_EMAIL}
+      - PASSWORD=${SN_PASSWORD}
+      - IDP=https://servicenode_pod:3001
+      - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
+    volumes:
+      - ${CA_CERT_DIR}:/shared-certs
+    networks:
+      - app_net
+
+  # ------------------------------------------------------------
+  # Community Solid Server
+  # ------------------------------------------------------------
+  datanode_pod:
+    image: solidproject/community-server:latest
+    build: https://github.com/CommunitySolidServer/CommunitySolidServer.git#main
+
+    ports:
+      - "3002:3001"
+
+    environment:
+      #- CSS_LOGGING_LEVEL=debug
+      - CSS_PORT=3001
+      - CSS_CONFIG=@css:config/https-file-cli.json
+      - CSS_BASE_URL=https://servicenode_pod:3001/
+      - CSS_HTTPS_KEY=/certs/servicenode_pod-key.pem
+      - CSS_HTTPS_CERT=/certs/servicenode_pod.pem
+      - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
+      - NODE_TLS_REJECT_UNAUTHORIZED='0'
+
+
+    volumes:
+      # ---- Format: ----
+      - ./datanode/.solid:/data
+      - ./datanode/certs:/certs
+      - ${CA_CERT_DIR}:/shared-certs
+
+    networks:
+      - app_net
+
+  servicenode_pod:
+    image: solidproject/community-server:latest
+    build: https://github.com/CommunitySolidServer/CommunitySolidServer.git#main
+
+    ports:
+      - "3001:3001"
+
+    environment:
+      #- CSS_LOGGING_LEVEL=debug
+      - CSS_PORT=3001
+      - CSS_CONFIG=@css:config/https-file-cli.json
+      - CSS_BASE_URL=https://servicenode_pod:3001/
+      - CSS_HTTPS_KEY=/certs/servicenode_pod-key.pem
+      - CSS_HTTPS_CERT=/certs/servicenode_pod.pem
+      - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
+      - NODE_TLS_REJECT_UNAUTHORIZED='0'
+
+
+    volumes:
+      # ---- Format: ----
+      - ./servicenode/.solid:/data
+      - ./servicenode/certs:/certs
+      - ${CA_CERT_DIR}:/shared-certs
+
+    networks:
+      - app_net
+
+################################################################################
+# NETWORK
+################################################################################
+networks:
+  app_net:
+    driver: bridge

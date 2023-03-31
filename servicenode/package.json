@@ -1,0 +1,12 @@
+{
+  "name": "servicenode",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Miel Vander Sande",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "evno": "^0.2.5",
+    "n3": "^1.16.4"
+  }
+}
