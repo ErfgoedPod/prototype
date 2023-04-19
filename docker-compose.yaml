@@ -17,6 +17,7 @@ services:
       - PASSWORD=${DN_PASSWORD}
       - IDP=https://datanode_pod:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
+      - TARGET=https://servicenode_pod:3001/inbox/
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
     networks:
@@ -36,6 +37,7 @@ services:
       - PASSWORD=${SN_PASSWORD}
       - IDP=https://servicenode_pod:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
+      - SENDER=https://datanode_pod:3001/profile/card#me
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
     networks:
@@ -55,12 +57,11 @@ services:
       #- CSS_LOGGING_LEVEL=debug
       - CSS_PORT=3001
       - CSS_CONFIG=@css:config/https-file-cli.json
-      - CSS_BASE_URL=https://servicenode_pod:3001/
-      - CSS_HTTPS_KEY=/certs/servicenode_pod-key.pem
-      - CSS_HTTPS_CERT=/certs/servicenode_pod.pem
+      - CSS_BASE_URL=https://datanode_pod:3001/
+      - CSS_HTTPS_KEY=/certs/datanode_pod-key.pem
+      - CSS_HTTPS_CERT=/certs/datanode_pod.pem
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
       - NODE_TLS_REJECT_UNAUTHORIZED='0'
-
 
     volumes:
       # ---- Format: ----

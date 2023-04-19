@@ -28,9 +28,11 @@ await receiver.start(inboxUrl)
 
 // Start interaction
 await delay(5 * 1000)
-sender.offer(namedNode())
+console.log(await sender.offer(namedNode(process.env['TARGET'])))
 
 await delay(5 * 1000)
-sender.offer(namedNode())
+console.log(await sender.offer(namedNode(process.env['TARGET'])))
+
+process.exit()
 
 

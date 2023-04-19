@@ -1917,10 +1917,10 @@
     ky "^0.25.1"
     ky-universal "^0.8.2"
 
-"@inrupt/solid-client-authn-core@^1.13.3":
-  version "1.13.3"
-  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-core/-/solid-client-authn-core-1.13.3.tgz#fd3b76f9bfef581f9a06ffdbc742d600f19f7a4f"
-  integrity sha512-MkpLiSs/5KNALK1THsYsAPlt39FtP9+lf+f/3EAtpJrS248cerkaCKS2m296+YiFzyVBU4q3GhepJ0IgA0NAqQ==
+"@inrupt/solid-client-authn-core@^1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-core/-/solid-client-authn-core-1.14.0.tgz#a37882a64b684419d135b68d473de541f62e0bb7"
+  integrity sha512-/H05XiMpgRjhHECT4Pku1jHlQoRzP4H5kcgZH+dbc54mMYrglBuCHXNGgW967zcg0eiCn0NROdovy8r4vl1LWQ==
   dependencies:
     cross-fetch "^3.1.5"
     events "^3.3.0"
@@ -1928,21 +1928,21 @@
     lodash.clonedeep "^4.5.0"
     uuid "^9.0.0"
 
-"@inrupt/solid-client-authn-node@^1.11.7":
-  version "1.13.3"
-  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-node/-/solid-client-authn-node-1.13.3.tgz#81f3f8b4fb36e262096083b2bfe554c37bff9973"
-  integrity sha512-OP+ZOTjuHT2V64vzINNl9oTSZmy/3Z7cvgIs9HZ/oU1erX9WcQKqx91Rpw//eiykgJcBS+Z4gCQFarcFyjZEeg==
+"@inrupt/solid-client-authn-node@^1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-node/-/solid-client-authn-node-1.14.0.tgz#fb2245845843eaf6215ab4823a8db01a69bc1cd3"
+  integrity sha512-9CPJ9iDBx16ddUR1KxqJIb/fpW2tH6AMb4tCjGB2CgeZXnF+6PR9yeoDlKMMQy0m7GBkj7E5tUadIL3RmQ9pYw==
   dependencies:
-    "@inrupt/solid-client-authn-core" "^1.13.3"
+    "@inrupt/solid-client-authn-core" "^1.14.0"
     cross-fetch "^3.1.5"
     jose "^4.3.7"
     openid-client "^5.1.0"
     uuid "^9.0.0"
 
-"@inrupt/solid-client@^1.21.0":
-  version "1.25.2"
-  resolved "https://registry.yarnpkg.com/@inrupt/solid-client/-/solid-client-1.25.2.tgz#7fb17c9857c060dfe91550899f4a54e37e13865a"
-  integrity sha512-g2ytgJ6LCZunicqm3bGfB0SExt89IwdHeWIxlAB70IQGGvMPTmv6qcweFrqM3bvdVRP4YJIoYuc98Xz6pqK9eQ==
+"@inrupt/solid-client@1.26.0":
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/solid-client/-/solid-client-1.26.0.tgz#23b126eeceeca551421f3247677324bfcadb686f"
+  integrity sha512-fiu5z4GHVXgsUlGSWOtxDQBPyQEcXx41Q8JiTem/qJ5oD8OPwJL+mjymJnoMfxyW+jVa5nq4XsF8GnFrF74niQ==
   dependencies:
     "@rdfjs/dataset" "^1.1.0"
     "@types/rdfjs__dataset" "^1.0.4"
@@ -2628,20 +2628,21 @@ events@^3.3.0:
   resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
-evno@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/evno/-/evno-0.2.5.tgz#a5be50ede46a221b7481247f2ea97bbd8474db88"
-  integrity sha512-BanQzL4r6IQYyISLMMOsoOHI61O5Ci0pAo0LNM6PYPVgeJJakf5rnvsZPnWlDTCvnkOIDh2KF6zOFlAXR53zNg==
+evno@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/evno/-/evno-0.3.1.tgz#85301d8e7978e50adc3f620ba2300ba7b93c5beb"
+  integrity sha512-d/kDDqnyhdeundfhe076U0PVSlVvSiy5kjNg+H/iNRn4CM6Q/H3Xj5Jo4UNzU2D0r4ZLShwKDOKGATK+xkJFJQ==
   dependencies:
     "@qiwi/primitive-storage" "^1.4.14"
     "@rdfjs/serializer-jsonld-ext" "^3.0.0"
     "@rdfjs/types" "^1.1.0"
+    "@types/n3" "^1.10.4"
     figlet "^1.5.2"
     jsonld-streaming-parser "^3.0.1"
     n3 "^1.16.3"
     poll "^3.2.1"
     readable-web-to-node-stream "^3.0.2"
-    solid-bashlib "0.2.3"
+    solid-bashlib "^0.3.4"
     uuid "^9.0.0"
 
 express@^4.17.3:
@@ -3697,14 +3698,14 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-solid-bashlib@0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/solid-bashlib/-/solid-bashlib-0.2.3.tgz#5841bb455d961ef934b37372ce3dd8d4295de05e"
-  integrity sha512-1+VkJAkB1Wxm8kTHJTqbo9ZfAw7NFV6FztPEy4z1E/3pDgqQ61UKWFdL7wqjYEi0WW8+D7IaVsFSW5/SsYsbMw==
+solid-bashlib@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/solid-bashlib/-/solid-bashlib-0.3.4.tgz#c76b2dd65f58d6fd4984f682d7041b13197bb5c6"
+  integrity sha512-KF+faqG0taVjoJ9c4P6PLESsl9qLBfVJhdCcLjAPvlkYlgQhNzSVKIep9+bWxFZmDoi9nVOPLQoPhx8NSyYn4A==
   dependencies:
     "@comunica/query-sparql" "^2.1.0"
-    "@inrupt/solid-client" "^1.21.0"
-    "@inrupt/solid-client-authn-node" "^1.11.7"
+    "@inrupt/solid-client" "1.26.0"
+    "@inrupt/solid-client-authn-node" "^1.14.0"
     chalk "^4.1.2"
     cli-columns "^4.0.0"
     cli-select "^1.1.2"

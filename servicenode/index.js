@@ -12,11 +12,14 @@ const options = {
 const receiver = await Receiver.build(options);
 const inboxUrl = await receiver.init(process.env['HOST'])
 
+await receiver.grantAccess(inboxUrl, process.env['SENDER'])
+
 const sender = Sender.build({id: namedNode(receiver.webId)}, options)
 
-receiver.on('notification', (n) =>{
+receiver.on('notification', async (n) =>{
     console.log(n.serialise())
-    sender.accept(n)
+    await sender.accept(n)
+    process.exit()
 })
 receiver.on('error', (e) =>{
     console.log(e)
