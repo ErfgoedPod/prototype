@@ -13,7 +13,6 @@ const options = {
     idp: process.env['IDP']
 }
 
-
 const receiver = await Receiver.build(options);
 const inboxUrl = await receiver.init(process.env['HOST'])
 

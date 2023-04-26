@@ -7,17 +7,17 @@ services:
     build: ./datanode
     image: datanode
     restart: always
-    command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' https://datanode_pod:3001)" != "200" ]]; do echo ..; sleep 5; done; echo backend is up;node index.js'
+    command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${DN_POD})" != "200" ]]; do echo ${DN_POD} responded with "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${DN_POD})"; sleep 5; done; echo backend is up;node index.js'
     depends_on:
-      - datanode_pod
+      - podserver
     environment:
-      - HOST=https://datanode_pod:3001/
+      - HOST=${DN_POD}
       - NAME=${DN_NAME}
       - EMAIL=${DN_EMAIL}
       - PASSWORD=${DN_PASSWORD}
-      - IDP=https://datanode_pod:3001
+      - IDP=https://podserver:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
-      - TARGET=https://servicenode_pod:3001/inbox/
+      - TARGET=https://podserver:3001/servicenode/inbox/
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
     networks:
@@ -27,17 +27,17 @@ services:
     build: ./servicenode
     image: servicenode
     restart: always
-    command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' https://servicenode_pod:3001)" != "200" ]]; do echo ..; sleep 5; done; echo backend is up;node index.js'
+    command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${SN_POD})" != "200" ]]; do echo ..; sleep 5; done; echo backend is up;node index.js'
     depends_on:
-      - servicenode_pod
+      - podserver
     environment:
-      - HOST=https://servicenode_pod:3001/
+      - HOST=${SN_POD}
       - NAME=${SN_NAME}
       - EMAIL=${SN_EMAIL}
       - PASSWORD=${SN_PASSWORD}
-      - IDP=https://servicenode_pod:3001
+      - IDP=https://podserver:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
-      - SENDER=https://datanode_pod:3001/profile/card#me
+      - SENDER=https://podserver:3001/datanode/profile/card#me
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
     networks:
@@ -46,33 +46,7 @@ services:
   # ------------------------------------------------------------
   # Community Solid Server
   # ------------------------------------------------------------
-  datanode_pod:
-    image: solidproject/community-server:latest
-    build: https://github.com/CommunitySolidServer/CommunitySolidServer.git#main
-
-    ports:
-      - "3002:3001"
-
-    environment:
-      #- CSS_LOGGING_LEVEL=debug
-      - CSS_PORT=3001
-      - CSS_CONFIG=@css:config/https-file-cli.json
-      - CSS_BASE_URL=https://datanode_pod:3001/
-      - CSS_HTTPS_KEY=/certs/datanode_pod-key.pem
-      - CSS_HTTPS_CERT=/certs/datanode_pod.pem
-      - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
-      - NODE_TLS_REJECT_UNAUTHORIZED='0'
-
-    volumes:
-      # ---- Format: ----
-      - ./datanode/.solid:/data
-      - ./datanode/certs:/certs
-      - ${CA_CERT_DIR}:/shared-certs
-
-    networks:
-      - app_net
-
-  servicenode_pod:
+  podserver:
     image: solidproject/community-server:latest
     build: https://github.com/CommunitySolidServer/CommunitySolidServer.git#main
 
@@ -82,19 +56,22 @@ services:
     environment:
       #- CSS_LOGGING_LEVEL=debug
       - CSS_PORT=3001
-      - CSS_CONFIG=@css:config/https-file-cli.json
-      - CSS_BASE_URL=https://servicenode_pod:3001/
-      - CSS_HTTPS_KEY=/certs/servicenode_pod-key.pem
-      - CSS_HTTPS_CERT=/certs/servicenode_pod.pem
+      - CSS_CONFIG=/css-custom-config.jsonld
+      - CSS_SEEDED_POD_CONFIG_JSON=/accounts.json
+      #- CSS_CONFIG=@css:config/https-file-cli.json
+      - CSS_BASE_URL=https://podserver:3001/
+      - CSS_HTTPS_KEY=/certs/podserver-key.pem
+      - CSS_HTTPS_CERT=/certs/podserver.pem
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
       - NODE_TLS_REJECT_UNAUTHORIZED='0'
 
-
     volumes:
       # ---- Format: ----
-      - ./servicenode/.solid:/data
-      - ./servicenode/certs:/certs
+      - ./podserver/.solid:/data
+      - ./podserver/certs:/certs
       - ${CA_CERT_DIR}:/shared-certs
+      - ./podserver/css-custom-config.jsonld:/css-custom-config.jsonld
+      - ./podserver/accounts.json:/accounts.json
 
     networks:
       - app_net

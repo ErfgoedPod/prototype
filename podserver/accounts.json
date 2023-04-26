@@ -1,0 +1,12 @@
+[
+    {
+        "podName": "datanode",
+        "email": "agent1@example.com",
+        "password": "password"
+    },
+    {
+        "podName": "servicenode",
+        "email": "agent2@example.com",
+        "password": "password"
+    }
+]

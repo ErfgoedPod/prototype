@@ -1917,29 +1917,29 @@
     ky "^0.25.1"
     ky-universal "^0.8.2"
 
-"@inrupt/solid-client-authn-core@^1.14.0":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-core/-/solid-client-authn-core-1.14.0.tgz#a37882a64b684419d135b68d473de541f62e0bb7"
-  integrity sha512-/H05XiMpgRjhHECT4Pku1jHlQoRzP4H5kcgZH+dbc54mMYrglBuCHXNGgW967zcg0eiCn0NROdovy8r4vl1LWQ==
+"@inrupt/solid-client-authn-core@^1.15.0":
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-core/-/solid-client-authn-core-1.15.0.tgz#d1566e4f2b024867e69caecb545b8dcf3cd84cd3"
+  integrity sha512-yvRvDHQZb3EZ2PsNk5GRf5J48FvBK4P3E9crQ2ypfKEE95z71qOae0kHX97PTQbRiYR6F5ECGnLQh4OG+1C+bA==
   dependencies:
-    cross-fetch "^3.1.5"
+    "@inrupt/universal-fetch" "^1.0.1"
     events "^3.3.0"
     jose "^4.10.0"
     lodash.clonedeep "^4.5.0"
     uuid "^9.0.0"
 
-"@inrupt/solid-client-authn-node@^1.11.7":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-node/-/solid-client-authn-node-1.14.0.tgz#fb2245845843eaf6215ab4823a8db01a69bc1cd3"
-  integrity sha512-9CPJ9iDBx16ddUR1KxqJIb/fpW2tH6AMb4tCjGB2CgeZXnF+6PR9yeoDlKMMQy0m7GBkj7E5tUadIL3RmQ9pYw==
+"@inrupt/solid-client-authn-node@^1.14.0":
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-node/-/solid-client-authn-node-1.15.0.tgz#5fb56c8c1b1d4a11fab7fbc28fe88478f757d3f7"
+  integrity sha512-+FjDRRwWaseEtwS8rQTfJcsR5bZDt5LnkM4pDaFywLzSP11XXZJHGITNMHv51pRQyvMZGRIc1yvPqbezl7LySw==
   dependencies:
-    "@inrupt/solid-client-authn-core" "^1.14.0"
-    cross-fetch "^3.1.5"
+    "@inrupt/solid-client-authn-core" "^1.15.0"
+    "@inrupt/universal-fetch" "^1.0.1"
     jose "^4.3.7"
     openid-client "^5.1.0"
     uuid "^9.0.0"
 
-"@inrupt/solid-client@^1.21.0":
+"@inrupt/solid-client@1.26.0":
   version "1.26.0"
   resolved "https://registry.yarnpkg.com/@inrupt/solid-client/-/solid-client-1.26.0.tgz#23b126eeceeca551421f3247677324bfcadb686f"
   integrity sha512-fiu5z4GHVXgsUlGSWOtxDQBPyQEcXx41Q8JiTem/qJ5oD8OPwJL+mjymJnoMfxyW+jVa5nq4XsF8GnFrF74niQ==
@@ -1953,6 +1953,14 @@
     uuid "^9.0.0"
   optionalDependencies:
     fsevents "^2.3.2"
+
+"@inrupt/universal-fetch@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@inrupt/universal-fetch/-/universal-fetch-1.0.1.tgz#37924564aaaca586913cab68728fb94c0a504928"
+  integrity sha512-oqbG7jS1fa6hVkjSir+u5Ab3eSbyxFyOjsgjDICL27mAd5z8oImTSETnY2hYbkRaJQYKMBOXhtm7L5/+EbeVJg==
+  dependencies:
+    node-fetch "^2.6.7"
+    undici "^5.19.1"
 
 "@jeswr/prefixcc@^1.2.1":
   version "1.2.1"
@@ -2267,6 +2275,13 @@ buffer@^6.0.3:
   dependencies:
     base64-js "^1.3.1"
     ieee754 "^1.2.1"
+
+busboy@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/busboy/-/busboy-1.6.0.tgz#966ea36a9502e43cdb9146962523b92f531f6893"
+  integrity sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==
+  dependencies:
+    streamsearch "^1.1.0"
 
 bytes@3.1.2:
   version "3.1.2"
@@ -2628,20 +2643,23 @@ events@^3.3.0:
   resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
-evno@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/evno/-/evno-0.2.5.tgz#a5be50ede46a221b7481247f2ea97bbd8474db88"
-  integrity sha512-BanQzL4r6IQYyISLMMOsoOHI61O5Ci0pAo0LNM6PYPVgeJJakf5rnvsZPnWlDTCvnkOIDh2KF6zOFlAXR53zNg==
+evno@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/evno/-/evno-0.4.0.tgz#960fc95649c19cdde5ea20fcb1dfc63c37d50bd2"
+  integrity sha512-Uh6v1+7XcyrtTbeLXQl34i9tnB9G66SxlvnujBCF8k2KoCyYSpeOPNv70dagbQGJ7UcCxdMbFFcTESe2mBgS9Q==
   dependencies:
     "@qiwi/primitive-storage" "^1.4.14"
     "@rdfjs/serializer-jsonld-ext" "^3.0.0"
     "@rdfjs/types" "^1.1.0"
+    "@types/n3" "^1.10.4"
     figlet "^1.5.2"
     jsonld-streaming-parser "^3.0.1"
+    md5 "^2.3.0"
     n3 "^1.16.3"
+    parse-duration "^1.0.3"
     poll "^3.2.1"
     readable-web-to-node-stream "^3.0.2"
-    solid-bashlib "0.2.3"
+    solid-bashlib "^0.3.4"
     uuid "^9.0.0"
 
 express@^4.17.3:
@@ -3213,6 +3231,13 @@ node-fetch@3.0.0-beta.9:
     data-uri-to-buffer "^3.0.1"
     fetch-blob "^2.1.1"
 
+node-fetch@^2.6.7:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.9.tgz#7c7f744b5cc6eb5fd404e0c7a9fec630a55657e6"
+  integrity sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==
+  dependencies:
+    whatwg-url "^5.0.0"
+
 object-hash@^2.0.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-2.2.0.tgz#5ad518581eefc443bd763472b8ff2e9c2c0d54a5"
@@ -3292,6 +3317,11 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==
+
+parse-duration@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/parse-duration/-/parse-duration-1.0.3.tgz#b6681f5edcc2689643b34c09ea63f86f58a35814"
+  integrity sha512-o6NAh12na5VvR6nFejkU0gpQ8jmOY9Y9sTU2ke3L3G/d/3z8jqmbBbeyBGHU73P4JLXfc7tJARygIK3WGIkloA==
 
 parseurl@~1.3.3:
   version "1.3.3"
@@ -3697,14 +3727,14 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-solid-bashlib@0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/solid-bashlib/-/solid-bashlib-0.2.3.tgz#5841bb455d961ef934b37372ce3dd8d4295de05e"
-  integrity sha512-1+VkJAkB1Wxm8kTHJTqbo9ZfAw7NFV6FztPEy4z1E/3pDgqQ61UKWFdL7wqjYEi0WW8+D7IaVsFSW5/SsYsbMw==
+solid-bashlib@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/solid-bashlib/-/solid-bashlib-0.3.4.tgz#c76b2dd65f58d6fd4984f682d7041b13197bb5c6"
+  integrity sha512-KF+faqG0taVjoJ9c4P6PLESsl9qLBfVJhdCcLjAPvlkYlgQhNzSVKIep9+bWxFZmDoi9nVOPLQoPhx8NSyYn4A==
   dependencies:
     "@comunica/query-sparql" "^2.1.0"
-    "@inrupt/solid-client" "^1.21.0"
-    "@inrupt/solid-client-authn-node" "^1.11.7"
+    "@inrupt/solid-client" "1.26.0"
+    "@inrupt/solid-client-authn-node" "^1.14.0"
     chalk "^4.1.2"
     cli-columns "^4.0.0"
     cli-select "^1.1.2"
@@ -3830,6 +3860,11 @@ streamify-string@^1.0.1:
   resolved "https://registry.yarnpkg.com/streamify-string/-/streamify-string-1.0.1.tgz#9e220de33e1c475dd30e0206f5b1815cc6c9525b"
   integrity sha512-RXvBglotrvSIuQQ7oC55pdV40wZ/17gTb68ipMC4LA0SqMN4Sqfsf31Dpei7qXpYqZQ8ueVnPglUvtep3tlhqw==
 
+streamsearch@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-1.1.0.tgz#404dd1e2247ca94af554e841a8ef0eaa238da764"
+  integrity sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==
+
 string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
@@ -3924,6 +3959,13 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
+
+undici@^5.19.1:
+  version "5.22.0"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-5.22.0.tgz#5e205d82a5aecc003fc4388ccd3d2c6e8674a0ad"
+  integrity sha512-fR9RXCc+6Dxav4P9VV/sp5w3eFiSdOjJYsbtWfd4s5L5C4ogyuVpdKIVHeW0vV1MloM65/f7W45nR9ZxwVdyiA==
+  dependencies:
+    busboy "^1.6.0"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
