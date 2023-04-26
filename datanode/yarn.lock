@@ -2643,10 +2643,10 @@ events@^3.3.0:
   resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
 
-evno@0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/evno/-/evno-0.4.0.tgz#960fc95649c19cdde5ea20fcb1dfc63c37d50bd2"
-  integrity sha512-Uh6v1+7XcyrtTbeLXQl34i9tnB9G66SxlvnujBCF8k2KoCyYSpeOPNv70dagbQGJ7UcCxdMbFFcTESe2mBgS9Q==
+evno@0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/evno/-/evno-0.4.2.tgz#1d2cae5b4b33b6e6a745914a80e961da324842b0"
+  integrity sha512-Q4GvEunYBTVfPkdERb5uX580FoF9vhjdRMX/qYhj+bryAQ/2oAvlR3+rDmO5+R517dTaR4g97SQqUs4mLRXkOw==
   dependencies:
     "@qiwi/primitive-storage" "^1.4.14"
     "@rdfjs/serializer-jsonld-ext" "^3.0.0"

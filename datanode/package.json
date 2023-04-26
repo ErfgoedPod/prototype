@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "evno": "0.4.0",
+    "evno": "0.4.2",
     "n3": "^1.16.4"
   }
 }

@@ -7,18 +7,25 @@ function delay(time) {
 }
 
 const options = {
-    name: process.env['NAME'],
-    email: process.env['EMAIL'],
-    password: process.env['PASSWORD'],
-    idp: process.env['IDP']
+    name: process.env.NAME,
+    email: process.env.EMAIL,
+    password: process.env.PASSWORD,
+    idp: process.env.IDP
 }
 
-const receiver = await Receiver.build(options);
-const inboxUrl = await receiver.init(process.env['HOST'])
+const receiver = await Receiver.build(options)
+const inboxUrl = await receiver.init(process.env.HOST)
 
-const sender = Sender.build({id: namedNode(receiver.webId)}, options)
-receiver.on('notification', (n) => {
-    console.log(n.serialise())
+await receiver.grantAccess(inboxUrl, process.env.SENDER)
+
+const actor = { 
+    id: namedNode(receiver.webId), inbox: namedNode(inboxUrl) 
+}
+const sender = await Sender.build(actor, options)
+
+receiver.on('notification', async (n) => {
+    console.log(`Received ${n.id.id} (${n.type.reduce((acc, curr) => acc + curr.id)})`)
+    console.log(await n.serialize())
 })
 receiver.on('error', (e) => {
     console.log(e)
@@ -27,11 +34,13 @@ await receiver.start(inboxUrl)
 
 // Start interaction
 await delay(5 * 1000)
-console.log(await sender.offer(namedNode(process.env['TARGET'])))
+console.log(process.env.TARGET)
+const res1 = await sender.offer(namedNode('http://example.org/objectA'), process.env.TARGET)
+console.log(await res1.text())
 
-await delay(5 * 1000)
-console.log(await sender.offer(namedNode(process.env['TARGET'])))
+await delay(20 * 1000)
+const res2 = await sender.offer(namedNode('http://example.org/objectB'), process.env.TARGET)
+console.log(await res2.text())
 
-process.exit()
 
 
