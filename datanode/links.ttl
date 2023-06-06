@@ -1,0 +1,4 @@
+@prefix schema: <https://schema.org/> .
+
+<https://archief.amsterdam/beeldbank/detail/6d88ba53-501c-dad5-d980-8275397dee3e> a schema:Image .
+<https://archief.amsterdam/beeldbank/detail/6d88ba53-501c-dad5-d980-8275397dee3e> schema:subject <http://data.beeldengeluid.nl/gtaa/99739> . # Pim Fortuyn in GTAA: persoonsnamen

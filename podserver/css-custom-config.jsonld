@@ -1,13 +1,14 @@
 {
-    "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^5.0.0/components/context.jsonld",
+    "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^6.0.0/components/context.jsonld",
     "import": [
       "css:config/app/main/default.json",
       "css:config/app/init/default.json",
       "css:config/app/setup/disabled.json",
       "css:config/app/variables/default.json",
       "css:config/http/handler/default.json",
-      "css:config/http/middleware/websockets.json",
-      "css:config/http/server-factory/https-websockets.json",
+      "css:config/http/middleware/default.json",
+      "css:config/http/notifications/websockets.json",
+      "css:config/http/server-factory/https.json",
       "css:config/http/static/default.json",
       "css:config/identity/access/public.json",
       "css:config/identity/email/default.json",
@@ -32,10 +33,5 @@
       "css:config/util/resource-locker/file.json",
       "css:config/util/variables/default.json"
     ],
-    "@graph": [
-      {
-        "comment": "Adds CLI options --httpsKey and --httpsCert and uses those to start an HTTPS server."
-      }
-    ]
-  }
-  
+    "@graph": []
+}

@@ -3,3 +3,4 @@ node_modules
 certs
 yarn-error.log
 .env
+.cache

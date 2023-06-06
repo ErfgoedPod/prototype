@@ -10,6 +10,10 @@ services:
     command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${DN_POD})" != "200" ]]; do echo ${DN_POD} responded with "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${DN_POD})"; sleep 5; done; echo backend is up;node index.js'
     depends_on:
       - podserver
+
+    ports:
+      - "3333:3000"
+
     environment:
       - HOST=${DN_POD}
       - NAME=${DN_NAME}
@@ -21,6 +25,8 @@ services:
       - SENDER=https://podserver:3001/servicenode/profile/card#me
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
+      - ./datanode/.cache:/usr/src/app/.cache
+      - ./frontend:/usr/src/app/frontend
     networks:
       - app_net
 
@@ -31,6 +37,8 @@ services:
     command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${SN_POD})" != "200" ]]; do echo ..; sleep 5; done; echo backend is up;node index.js'
     depends_on:
       - podserver
+    ports:
+      - "3334:3000"
     environment:
       - HOST=${SN_POD}
       - NAME=${SN_NAME}
@@ -41,6 +49,9 @@ services:
       - SENDER=https://podserver:3001/datanode/profile/card#me
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
+      - ./servicenode/.cache:/usr/src/app/.cache
+      - ./frontend:/usr/src/app/frontend
+
     networks:
       - app_net
 
