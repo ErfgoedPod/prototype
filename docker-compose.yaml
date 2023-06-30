@@ -22,7 +22,7 @@ services:
       - IDP=https://podserver:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
       - TARGET=https://podserver:3001/servicenode/inbox/
-      - SENDER=https://podserver:3001/servicenode/profile/card#me
+      - AGENTS=${AGENTS}
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
       - ./datanode/.cache:/usr/src/app/.cache
@@ -46,7 +46,7 @@ services:
       - PASSWORD=${SN_PASSWORD}
       - IDP=https://podserver:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
-      - SENDER=https://podserver:3001/datanode/profile/card#me
+      - AGENTS=${AGENTS}
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
       - ./servicenode/.cache:/usr/src/app/.cache

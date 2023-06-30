@@ -4,3 +4,4 @@ certs
 yarn-error.log
 .env
 .cache
+.yarn
