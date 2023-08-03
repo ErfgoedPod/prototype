@@ -1,5 +1,5 @@
 import { Sender, Receiver, EventNotification } from "evno"
-import { DataFactory } from 'n3'
+import { DataFactory, Writer } from 'n3'
 const { namedNode } = DataFactory
 import { v4 as uuidv4 } from 'uuid'
 import express from 'express'
@@ -8,6 +8,12 @@ import nunjucks from 'nunjucks'
 import sassMiddleware from 'node-sass-middleware'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import * as fs from 'fs'
+
+const predMap = {
+    'https://schema.org/subject': namedNode('https://schema.org/subjectOf'),
+    'https://schema.org/location': namedNode('https://schema.org/event')
+}
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -20,6 +26,17 @@ function delay(time) {
 
 function addToStack(n, type) {
     stack.push({ type, notification: n, time: new Date() })
+}
+
+function writeTriple(s, p ,o) {
+    const stream = fs.createWriteStream('data/links.ttl')
+    const writer = new Writer(stream, { end: false, prefixes: { schema: 'https://schema.org/' } });
+    writer.addQuad(
+    s,                   // Subject
+    p,   // Predicate
+    o                   // Object
+    );
+    writer.end();
 }
 
 const options = {
@@ -60,17 +77,18 @@ receiver.on('notification', async (n) => {
         console.log(`Sent accept: ${res.statusText}`)
     } else {
         await delay(30 * 1000)
+        writeTriple(n.object.object, predMap[n.object.relationship.value],n.object.subject)
         const announce = EventNotification.announce({
             id: namedNode(`urn:uuid:${uuidv4()}`),
             type: [namedNode('https://www.w3.org/ns/activitystreams#Relationship')],
             subject: n.object.object,
-            relationship: namedNode('https://schema.org/subjectOf'),
+            relationship: predMap[n.object.relationship.value],
             object: n.object.subject
         }, actor, n)
+        const res = await sender.send(announce)
         addToStack(announce, 'sent')
+
     }
-
-
 })
 receiver.on('error', (e) => {
     console.log(e)
@@ -178,7 +196,5 @@ function shutDown() {
     connections.forEach(curr => curr.end())
     setTimeout(() => connections.forEach(curr => curr.destroy()), 5000)
 }
-
-
 
 

@@ -5,3 +5,5 @@ yarn-error.log
 .env
 .cache
 .yarn
+public/*.css
+*/data

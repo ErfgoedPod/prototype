@@ -21,7 +21,8 @@ services:
       - PASSWORD=${DN_PASSWORD}
       - IDP=https://podserver:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
-      - TARGET=https://podserver:3001/servicenode/inbox/
+      - TARGET=${SN_INBOX}
+      - REGISTER=${R_INBOX}
       - AGENTS=${AGENTS}
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
@@ -47,13 +48,69 @@ services:
       - IDP=https://podserver:3001
       - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
       - AGENTS=${AGENTS}
+      - TARGET=${DN_INBOX}
     volumes:
       - ${CA_CERT_DIR}:/shared-certs
       - ./servicenode/.cache:/usr/src/app/.cache
       - ./frontend:/usr/src/app/frontend
+      - ./servicenode/data:/usr/src/app/data
 
     networks:
       - app_net
+
+  # # ------------------------------------------------------------
+  # # Data register proxy app
+  # # ------------------------------------------------------------
+  # dataset-register-proxy:
+  #   container_name: dataset-register-proxy
+  #   build: ./dataset-register-proxy
+  #   command: bash -c 'while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${REGISTER})" != "200" ]]; do echo ..; sleep 5; done; echo register is up; while [[ "$$(curl -k --connect-timeout 2 -s -o /dev/null -w ''%{http_code}'' ${R_POD})" != "200" ]]; do echo ..; sleep 5; done; echo podserver is up ;node proxy.js'
+  #   depends_on:
+  #     - registry
+  #     - podserver
+  #   ports:
+  #     - "3335:3000"
+  #   environment:
+  #     - HOST=${R_POD}
+  #     - NAME=${R_NAME}
+  #     - EMAIL=${R_EMAIL}
+  #     - PASSWORD=${R_PASSWORD}
+  #     - IDP=https://podserver:3001
+  #     - NODE_EXTRA_CA_CERTS=/shared-certs/rootCA.pem
+  #     - AGENTS=${AGENTS}
+  #     - REGISTER=${R_INBOX}
+  #     - ./dataset-register-proxy/.cache:/usr/src/app/.cache
+  #     - ./frontend:/usr/src/app/frontend
+
+  #   networks:
+  #     - app_net
+
+  # # ------------------------------------------------------------
+  # # Data register app
+  # # ------------------------------------------------------------
+  # registry:
+  #   build: https://github.com/netwerk-digitaal-erfgoed/dataset-register.git#main
+  #   image: dataset-register
+  #   depends_on:
+  #     - graphdb
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #      - GRAPHDB_URL=http://graphdb:7200
+  #   networks:
+  #     - app_net
+
+  # # ------------------------------------------------------------
+  # # Data register database
+  # # ------------------------------------------------------------
+  # graphdb:
+  #   image: khaller/graphdb-free:10.0.0
+  #   ports:
+  #     - "7200:7200"
+  #   volumes:
+  #     - "$PWD/data/graphdb:/data"
+  #   networks:
+  #     - app_net
 
   # ------------------------------------------------------------
   # Community Solid Server

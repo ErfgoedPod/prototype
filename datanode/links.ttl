@@ -1,6 +1,8 @@
 @prefix schema: <https://schema.org/> .
 @prefix bbArchiefAmsterdam: <https://archief.amsterdam/beeldbank/detail/> .
-@prefix gtaa: <http://data.beeldengeluid.nl/gtaa/> .
 
 bbArchiefAmsterdam:6d88ba53-501c-dad5-d980-8275397dee3e a schema:Image .
-bbArchiefAmsterdam:6d88ba53-501c-dad5-d980-8275397dee3e schema:subject gtaa:99739 . # Pim Fortuyn in GTAA: persoonsnamen
+# Pim Fortuyn in GTAA: persoonsnamen
+bbArchiefAmsterdam:6d88ba53-501c-dad5-d980-8275397dee3e schema:subject <http://data.beeldengeluid.nl/gtaa/99739> .
+# Damstraat in Adamlink: straten in amsterdam
+bbArchiefAmsterdam:6d88ba53-501c-dad5-d980-8275397dee3e schema:location <https://adamlink.nl/geo/street/damstraat/884> . 

@@ -66,7 +66,7 @@ parser.parse(rdfStream, async (error, quad) => {
     if (quad) {
         if (quad.predicate.value == "https://schema.org/subject") {
             // Start interaction
-            await delay(30 * 1000)
+            await delay(10 * 1000)
             // send first offer
             const options = {
                 id: namedNode(`urn:uuid:${uuidv4()}`),
@@ -78,13 +78,13 @@ parser.parse(rdfStream, async (error, quad) => {
             const announce = EventNotification.announce(options, actor)
             await sender.send(announce, process.env.TARGET)
             addToStack(announce, 'sent')
-        } else {
-            // Start interaction
-            await delay(20 * 1000)
-            // send first offer
-            const offer1 = EventNotification.offer(quad.subject, actor)
-            await sender.send(offer1, process.env.TARGET)
-            addToStack(offer1, 'sent')
+        // } else {
+        //     // Start interaction
+        //     await delay(20 * 1000)
+        //     // send first offer
+        //     const offer1 = EventNotification.offer(quad.subject, actor)
+        //     await sender.send(offer1, process.env.REGISTER)
+        //     addToStack(offer1, 'sent')
         }
     }
 })

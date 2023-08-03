@@ -8,5 +8,10 @@
         "podName": "servicenode",
         "email": "agent2@example.com",
         "password": "password"
+    },
+    {
+        "podName": "register",
+        "email": "agent3@example.com",
+        "password": "password"
     }
 ]
